@@ -9,9 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
-    defaults:
-      run:
-        working-directory: src
 
     # Service containers to run with job
     services:
