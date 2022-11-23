@@ -22,6 +22,7 @@ jobs:
         with:
           title: "Merge Main to QA"
           branch: qa-promotion
+          delete-branch: true
           token: ${{ secrets.PAT }}
 
       - name: Check Pull Request Outputs
