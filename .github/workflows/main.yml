@@ -27,7 +27,7 @@ jobs:
         uses: juliangruber/approve-pull-request-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
+          number: 1
 
       # - name: Enable Pull Request Automerge
       #   if: steps.cpr.outputs.pull-request-operation == 'created'
