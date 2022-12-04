@@ -11,6 +11,7 @@ jobs:
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
           webhook_uri: ${{ secrets.TEAMS_CHANNEL_DEPLOYMENT_WEBHOOK }}
-          title: ${{ format('New Weigh2Go Build - ${0} - ${1} - ${2}', 'Staging', '1.00', '25986') }}
+          title: ${{ format('New Weigh2Go Build - {0} - {1} - {2}', 'Staging', '1.00', '25986') }}
           summary: "A new Weigh2Go build is available."
-          text: ${{ format('A new Weigh2Go build is available at - ${0}/${1}/actions/runs/${2}', github.server_url, github.repository, github.run_id) }}
+          text: ${{ format('A new Weigh2Go build is available at - {0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
+          actions: '[{ "@type": "OpenUri", "name": "Download URL", "targets": [{ "os": "default", "uri": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }] }]'
