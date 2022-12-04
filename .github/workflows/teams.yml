@@ -1,3 +1,12 @@
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  test_teams_message:
+    runs-on: ubuntu-latest
+    steps:
       - name: Send a message to Microsoft Teams
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
