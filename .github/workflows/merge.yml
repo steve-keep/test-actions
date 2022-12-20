@@ -15,6 +15,12 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
+          git checkout -b staging-promotion
+          git fetch origin main:main
+          git merge main -X theirs --allow-unrelated-histories
+          git add -A
+          git commit -m "merge main"
+          git push
 
       - name: Create Pull Request
         id: cpr
@@ -30,20 +36,6 @@ jobs:
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-
-      - uses: actions/checkout@v3
-        with:
-          ref: staging-promotion
-
-      - name: Reset promotion branch
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git fetch origin main:main
-          git merge main -X theirs --allow-unrelated-histories
-          git add -A
-          git commit -m "merge main"
-          git push
 
       - name: Enable Automerge on Pull Request
         if: steps.cpr.outputs.pull-request-operation == 'created'
