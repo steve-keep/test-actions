@@ -1,34 +1,21 @@
-name: sync-changes-on-main-to-staging
+name: sync-changes-on-master-to-staging
 on:
   schedule:
-    # Run at midnight Sydney time
-    - cron: "0 13 * * *"
-  workflow_dispatch:
+    - cron: "*/5 * * * *"
 
 jobs:
-  sync-changes-on-main-to-staging:
+  sync-changes-on-master-to-staging:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           ref: staging
 
-      - name: Set Git Configs
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git config pull.rebase true
-          git fetch origin main:main
-          git reset --hard main
-          git status
-          git pull -X theirs
-          git status
-
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          title: "Merge main to staging"
+          title: "Merge Master to Staging"
           branch: staging-promotion
           delete-branch: true
           token: ${{ secrets.PAT }}
@@ -38,6 +25,20 @@ jobs:
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+
+      - uses: actions/checkout@v3
+        with:
+          ref: staging-promotion
+
+      - name: Reset promotion branch
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git fetch origin master:master
+          git merge master -X theirs --allow-unrelated-histories
+          git add -A
+          git commit -m "merge master"
+          git push
 
       - name: Enable Automerge on Pull Request
         if: steps.cpr.outputs.pull-request-operation == 'created'
