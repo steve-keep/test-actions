@@ -11,6 +11,11 @@ jobs:
         with:
           ref: staging
 
+      - name: Set Git Configs
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
