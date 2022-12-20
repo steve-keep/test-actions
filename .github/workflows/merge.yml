@@ -18,9 +18,6 @@ jobs:
           git checkout -b staging-promotion
           git fetch origin main:main
           git merge main -X theirs --allow-unrelated-histories
-          git add -A
-          git commit -m "merge main"
-          git push
 
       - name: Create Pull Request
         id: cpr
