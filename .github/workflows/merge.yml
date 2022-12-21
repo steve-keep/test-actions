@@ -11,13 +11,12 @@ jobs:
 
       - name: Set Git Configs
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          git checkout -b staging-promotion
+          git config --global user.email "bot-test@bot.com"
+          git config --global user.name "Bot Test"
+          git config pull.rebase true
           git fetch origin main:main
-          git merge main -X theirs --allow-unrelated-histories
-          git push -u origin staging-promotion
-          git checkout staging
+          git rebase --merge -X theirs main --allow-unrelated-histories
+          git pull
 
       - name: Create Pull Request
         id: cpr
