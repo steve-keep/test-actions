@@ -1,5 +1,9 @@
 name: sync-changes-on-main-to-staging
-on: [workflow_dispatch]
+on:
+  schedule:
+    # Run at midnight Sydney time
+    - cron: "0 13 * * *"
+  workflow_dispatch:
 
 jobs:
   sync-changes-on-main-to-staging:
