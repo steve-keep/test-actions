@@ -17,7 +17,7 @@ jobs:
           git fetch origin main:main
           git reset --hard main
           git status
-          git pull -X ours
+          git pull -X theirs
           git status
 
       - name: Create Pull Request
