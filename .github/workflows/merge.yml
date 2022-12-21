@@ -15,7 +15,7 @@ jobs:
           git config --global user.name "Bot Test"
           git config pull.rebase true
           git fetch origin main:main
-          git rebase --merge -X theirs main --allow-unrelated-histories
+          git rebase --merge -X theirs main
           git pull
 
       - name: Create Pull Request
