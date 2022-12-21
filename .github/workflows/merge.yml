@@ -15,7 +15,7 @@ jobs:
           git config user.email "<>"
           git fetch origin main:main
           git merge main -X theirs --allow-unrelated-histories
-          git status
+          git diff --name-only --diff-filter=U
 
       - name: Create Pull Request
         id: cpr
