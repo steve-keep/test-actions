@@ -16,6 +16,7 @@ jobs:
           git pull
           git fetch origin main:main
           git pull
+          git fetch origin main:main
           git merge main -X theirs --allow-unrelated-histories
           git status
 
