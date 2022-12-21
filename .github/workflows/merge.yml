@@ -13,11 +13,11 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          git pull
+          git config pull.rebase true
           git fetch origin main:main
-          git pull
-          git fetch origin main:main
-          git merge main -X theirs --allow-unrelated-histories
+          git reset --hard main
+          git status
+          git pull -X theirs
           git status
 
       - name: Create Pull Request
