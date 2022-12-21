@@ -16,6 +16,7 @@ jobs:
           git checkout -b staging-promotion
           git fetch origin main:main
           git merge main -X theirs --allow-unrelated-histories
+          git push -u origin staging-promotion
           git checkout staging
 
       - name: Create Pull Request
