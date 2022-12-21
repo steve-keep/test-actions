@@ -11,12 +11,10 @@ jobs:
 
       - name: Set Git Configs
         run: |
-          git config --global user.email "bot-test@bot.com"
-          git config --global user.name "Bot Test"
-          git config pull.rebase true
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
           git fetch origin main:main
-          git rebase main -s recursive -X ours
-          git pull
+          git merge main -X theirs --allow-unrelated-histories
 
       - name: Create Pull Request
         id: cpr
